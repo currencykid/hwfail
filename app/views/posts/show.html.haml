@@ -1,5 +1,8 @@
 %h1= @post.title
 %p= @post.description 
+%h3
+  Created by: 
+%p= @post.user.email 
 
 = link_to "Back", root_path 
 = link_to "Edit", edit_post_path
