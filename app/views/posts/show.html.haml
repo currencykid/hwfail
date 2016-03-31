@@ -1,9 +1,13 @@
-%h1= @post.title
-%p= @post.description 
-%h3
-  Created by: 
-%p= @post.user.email 
+.col-md-6.col-md-offset-3
 
-= link_to "Back", root_path 
-= link_to "Edit", edit_post_path
-= link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }
+
+  = image_tag @post.image.url(:medium)
+  %h1= @post.title
+  %p= @post.description 
+  %h3
+    Created by: 
+  %p= @post.user.email 
+
+  = link_to "Back", root_path 
+  = link_to "Edit", edit_post_path
+  = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }
