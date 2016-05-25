@@ -1,23 +1,21 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show,:edit,:update,:destroy, :upvote]
   before_action :authenticate_user!, except: [:index,:show] 
-  def index
-    @posts = Post.all.order("created_at DESC")  
-  end 
 
+  def index
+    @posts = Post.all.order("created_at DESC")  end 
   def new
-    @post = current_user.posts.build
+    @post = Post.new
   end 
 
   def show
-    
   end 
 
   def create
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to @post, notice: "Post created successfully"
+      render 'new', notice: "Post created successfully"
     else 
       render 'new'
     end 
@@ -31,7 +29,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post, notice: "Post updated successfully"
     else 
-      render 'edit' 
+      render 'new' 
     end 
   end 
 
@@ -45,11 +43,10 @@ class PostsController < ApplicationController
     redirect_to :back
   end
 
-  
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :image)
+    params.require(:post).permit(:image)
   end 
 
   def find_post
